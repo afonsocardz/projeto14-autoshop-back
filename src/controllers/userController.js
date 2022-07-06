@@ -1,9 +1,9 @@
 import { User } from "../schemas/User.js";
-//import db from "../databases/mongo.js"
+import db from "../databases/mongo.js"
 
 async function createUser(req, res) {
     try {
-        //db.collection("users").insertOne();
+        db.collection("users").insertOne();
         res.status(200).send([{ text: "Usuário criado com sucesso!" }]);
     } catch (err) {
         console.log(err);
@@ -15,7 +15,7 @@ async function loginUser(req, res) {
     const { email } = res.locals.login;
 
     try {
-        //const findUser = await db.collection("users").findOne({ email });
+        const findUser = await db.collection("users").findOne({ email });
         if (findUser) {
             res.status(200).send(findUser);
         } else {
