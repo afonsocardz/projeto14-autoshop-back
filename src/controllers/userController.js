@@ -11,4 +11,19 @@ async function createUser(req, res) {
     }
 }
 
-export { createUser };
+async function loginUser(req, res) {
+    const { email } = res.locals.login;
+
+    try {
+        //const findUser = await db.collection("users").findOne({ email });
+        if (findUser) {
+            res.status(200).send(findUser);
+        } else {
+            res.status(404).send([{ text: "Usuário não encontrado!" }]);
+        }
+    } catch (err) {
+        res.status(500).send("loginUser: \n" + err)
+    }
+}
+
+export { createUser, loginUser };
