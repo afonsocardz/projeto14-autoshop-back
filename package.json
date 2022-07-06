@@ -2,6 +2,7 @@
   "name": "projeto14-autosho-back",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "./src/app.js",
   "scripts": {
     "start": "node ./src/app.js",
