@@ -8,8 +8,20 @@ async function createProduct(req, res) {
 
     } catch (err) {
         console.log(err);
+        res.status(500).send("createProduct:\n"+ err);
     }
 
 }
 
-export { createProduct };
+async function createBrand(req,res){
+    const brand = req.body;
+    try{
+        await db.collection("brands").insertOne(brand);
+        res.status(201).send(brand);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("createBrand:\n"+ err);
+    }
+}
+
+export { createProduct, createBrand };

@@ -2,19 +2,31 @@ import joi from "joi";
 
 export const Product = joi.object({
     name: joi.string()
-    .required(),
+        .required(),
     currency_symbol: joi.string()
-    .required(),
+        .required(),
     description: joi.string()
-    .required(),
+        .required(),
     price: joi.number()
-    .required(),
+        .required(),
     image: joi.string()
-    .required(),
+        .required(),
     categoryId: joi.string()
-    .required(),
+        .required(),
     brandId: joi.string()
-    .required(),
+        .required(),
     sku: joi.string()
-    .required()
+        .required()
+});
+
+export const Brand = joi.object({
+    name: joi.string()
+        .required(),
+    image: joi.string()
+        .required()
+})
+
+export const Category = joi.object({
+    name: joi.string()
+    .required(),
 })
