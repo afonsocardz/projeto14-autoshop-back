@@ -18,7 +18,7 @@ async function loginUser(req, res) {
     try {
         const findUser = await db.collection("users").findOne({ email });
         if (findUser) {
-            res.status(200).send(findUser);
+            res.status(200).send([{user:findUser, text:"Login feito com sucesso", label: "success"}]);
         } else {
             res.status(404).send([{ text: "Usuário não encontrado!" }]);
         }
