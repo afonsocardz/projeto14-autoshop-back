@@ -16,6 +16,7 @@ export default async function validateUser(req, res, next) {
         })
         res.status(422).send(errors);
     } else {
+        res.locals.user = userObj;
         next();
     }
 }

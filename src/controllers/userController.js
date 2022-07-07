@@ -1,9 +1,10 @@
-import { User } from "../schemas/User.js";
 import db from "../databases/mongo.js"
+import bcrypt from "bcrypt";
 
 async function createUser(req, res) {
+    const user = res.locals.user;
     try {
-        db.collection("users").insertOne();
+        await db.collection("users").insertOne({ ...user, password: bcrypt.hashSync(user.password, 10) });
         res.status(200).send([{ text: "Usuário criado com sucesso!" }]);
     } catch (err) {
         console.log(err);
