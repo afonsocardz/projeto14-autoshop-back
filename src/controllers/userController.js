@@ -1,4 +1,3 @@
-import { User } from "../schemas/User.js";
 import db from "../databases/mongo.js"
 import bcrypt from "bcrypt";
 
