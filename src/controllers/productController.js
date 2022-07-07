@@ -24,4 +24,14 @@ async function createBrand(req,res){
     }
 }
 
-export { createProduct, createBrand };
+async function getAllProducts(req, res) {
+    try {
+        const products = await db.collection("products").find().toArray();
+        res.status(200).send(products);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("getAllProducts:\n"+ err);
+    }
+}
+
+export { createProduct, createBrand, getAllProducts };
