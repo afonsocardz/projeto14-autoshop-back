@@ -8,6 +8,6 @@ const productRoute = Router();
 
 productRoute.post("/product", validateProduct, createProduct);
 productRoute.post("/product/brand", validateBrand, createBrand);
-productRoute.post("/product/brand", validateCategory, createCategory);
+productRoute.post("/product/category", validateCategory, createCategory);
 
 export { productRoute };
