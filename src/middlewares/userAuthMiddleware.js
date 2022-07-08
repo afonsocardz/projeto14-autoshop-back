@@ -1,7 +1,7 @@
 import * as jose from "jose";
 async function userAuth(req, res, next) {
   const { token } = req.headers;
-  const {spkiPem} = req.body;
+  const {publicKey: spkiPem} = req.body;
 
   try {
     const ecPublicKey = await jose.importSPKI(spkiPem);
