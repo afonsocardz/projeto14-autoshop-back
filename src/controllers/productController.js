@@ -24,4 +24,15 @@ async function createBrand(req,res){
     }
 }
 
-export { createProduct, createBrand };
+async function createCategory(req,res){
+    const category = req.body;
+    try{
+        await db.collection("categories").insertOne(category);
+        res.status(201).send([{text: "Categoria cadastrada com sucesso",  label: "success"}]);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("createBrand:\n"+ err);
+    }
+}
+
+export { createProduct, createBrand, createCategory };
