@@ -25,6 +25,17 @@ async function createBrand(req,res){
     }
 }
 
+async function createCategory(req,res){
+    const category = req.body;
+    try{
+        await db.collection("categories").insertOne(category);
+        res.status(201).send([{text: "Categoria cadastrada com sucesso",  label: "success"}]);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("createBrand:\n"+ err);
+    }
+}
+
 async function getAllProducts(req, res) {
     try {
         const products = await db.collection("products").find().toArray();
@@ -36,7 +47,6 @@ async function getAllProducts(req, res) {
 }
 async function getProductById(req, res) {
     const { productId } = req.params;
-
     try {
         const product = await db.collection("products").findOne({ _id: new ObjectId(productId)});
         if (product) {
@@ -50,4 +60,4 @@ async function getProductById(req, res) {
     }
 }
 
-export { createProduct, createBrand, getAllProducts, getProductById };
+export { createProduct, createBrand, createCategory, getAllProducts, getProductById };
