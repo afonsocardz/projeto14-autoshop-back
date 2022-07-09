@@ -50,4 +50,4 @@ async function getProductById(req, res) {
     }
 }
 
-export { createProduct, createBrand, getAllProducts };
+export { createProduct, createBrand, getAllProducts, getProductById };

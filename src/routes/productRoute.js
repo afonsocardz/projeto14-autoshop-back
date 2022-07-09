@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createProduct, createBrand, getAllProducts } from "../controllers/productController.js";
+import { createProduct, createBrand, getAllProducts, getProductById } from "../controllers/productController.js";
 import validateBrand from "../middlewares/validateBrandMiddleware.js";
 import validateProduct from "../middlewares/validateProductMiddleware.js";
 
