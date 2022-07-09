@@ -6,6 +6,7 @@ import validateProduct from "../middlewares/validateProductMiddleware.js";
 const productRoute = Router();
 
 productRoute.get("/products", getAllProducts);
+productRoute.get("/products/:productId", getProductById)
 productRoute.post("/product", validateProduct, createProduct);
 productRoute.post("/product/brand", validateBrand, createBrand);
 
