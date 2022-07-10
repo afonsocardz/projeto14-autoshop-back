@@ -12,7 +12,7 @@ export const Product = joi.object({
     image: joi.string()
         .required(),
     category: joi.string()
-    .valid('vehicule', 'acessory')
+    .valid('Veiculo', 'Acessório')
         .required(),
     brand: joi.string()
     .valid("Audi" , "BMW" , "Chery" , "Chevrolet" , "Citroën" , "Fiat" , "Ford" , "Honda" , "Hyundai" , "Jeep" , "Mercedes-Benz" , "Mitsubishi" , "Nissan" , "Peugeot" , "Renault" , "Suzuki" , "Toyota" , "Volkswagen")
