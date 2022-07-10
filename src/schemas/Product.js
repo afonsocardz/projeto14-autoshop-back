@@ -11,22 +11,12 @@ export const Product = joi.object({
         .required(),
     image: joi.string()
         .required(),
-    categoryId: joi.string()
+    category: joi.string()
+    .valid('vehicule', 'acessory')
         .required(),
-    brandId: joi.string()
+    brand: joi.string()
+    .valid("Audi" , "BMW" , "Chery" , "Chevrolet" , "Citroën" , "Fiat" , "Ford" , "Honda" , "Hyundai" , "Jeep" , "Mercedes-Benz" , "Mitsubishi" , "Nissan" , "Peugeot" , "Renault" , "Suzuki" , "Toyota" , "Volkswagen")
         .required(),
     sku: joi.string()
         .required()
 });
-
-export const Brand = joi.object({
-    name: joi.string()
-        .required(),
-    image: joi.string()
-        .required()
-})
-
-export const Category = joi.object({
-    name: joi.string()
-    .required(),
-})

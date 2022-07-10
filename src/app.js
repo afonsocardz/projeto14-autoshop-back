@@ -12,7 +12,7 @@ app.use(json());
 app.use(cors());
 
 app.use(userRoute);
-app.use(userAuth, productRoute);
+app.use( productRoute);
 
 app.listen(PORT, () => {
     console.log("Server is running on port " + PORT);
