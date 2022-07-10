@@ -1,11 +1,12 @@
 import * as jose from "jose";
 async function userAuth(req, res, next) {
-  const { token,publicKey: spkiPem } = req.headers;
+  const { authorization } = req.headers;
+  const { token, publicKey: spkiPem } = authorization;
 
   try {
     const ecPublicKey = await jose.importSPKI(spkiPem);
     console.log(ecPublicKey);
-    const { payload } = await jose.jwtVerify(token, ecPublicKey, {
+    const { payload } = await jose.jwtVerify(token?.replace("Bearer ", ""), ecPublicKey, {
       issuer: 'urn:example:issuer',
       audience: 'urn:example:audience',
     })
