@@ -5,35 +5,13 @@ async function createProduct(req, res) {
     const product = req.body;
     try {
         await db.collection("products").insertOne(product);
-        res.status(201).send(product);
+        res.status(201).send([{ text: 'Produto criado com sucesso', label: 'success' }]);
 
     } catch (err) {
         console.log(err);
-        res.status(500).send("createProduct:\n"+ err);
+        res.status(500).send("createProduct:\n" + err);
     }
 
-}
-
-async function createBrand(req,res){
-    const brand = req.body;
-    try{
-        await db.collection("brands").insertOne(brand);
-        res.status(201).send(brand);
-    } catch (err) {
-        console.log(err);
-        res.status(500).send("createBrand:\n"+ err);
-    }
-}
-
-async function createCategory(req,res){
-    const category = req.body;
-    try{
-        await db.collection("categories").insertOne(category);
-        res.status(201).send([{text: "Categoria cadastrada com sucesso",  label: "success"}]);
-    } catch (err) {
-        console.log(err);
-        res.status(500).send("createBrand:\n"+ err);
-    }
 }
 
 async function getAllProducts(req, res) {
@@ -42,13 +20,13 @@ async function getAllProducts(req, res) {
         res.status(200).send(products);
     } catch (err) {
         console.log(err);
-        res.status(500).send("getAllProducts:\n"+ err);
+        res.status(500).send("getAllProducts:\n" + err);
     }
 }
 async function getProductById(req, res) {
     const { productId } = req.params;
     try {
-        const product = await db.collection("products").findOne({ _id: new ObjectId(productId)});
+        const product = await db.collection("products").findOne({ _id: new ObjectId(productId) });
         if (product) {
             res.status(200).send(product);
         } else {
@@ -56,8 +34,8 @@ async function getProductById(req, res) {
         }
     } catch (err) {
         console.log(err);
-        res.status(500).send("getProductById:\n"+ err);
+        res.status(500).send("getProductById:\n" + err);
     }
 }
 
-export { createProduct, createBrand, createCategory, getAllProducts, getProductById };
+export { createProduct, getAllProducts, getProductById };
