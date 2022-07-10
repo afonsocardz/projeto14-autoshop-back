@@ -47,7 +47,6 @@ async function getAllProducts(req, res) {
 }
 async function getProductById(req, res) {
     const { productId } = req.params;
-
     try {
         const product = await db.collection("products").findOne({ _id: new ObjectId(productId)});
         if (product) {
@@ -61,4 +60,4 @@ async function getProductById(req, res) {
     }
 }
 
-export { createProduct, createBrand, createCategory, getAllProducts };
+export { createProduct, createBrand, createCategory, getAllProducts, getProductById };
