@@ -1,17 +1,18 @@
 import * as jose from "jose";
+import db from "../databases/mongo.js";
+
 async function userAuth(req, res, next) {
   const { authorization } = req.headers;
-  const { token, publicKey: spkiPem } = authorization;
-
+  const token = authorization?.replace("Bearer ", "");
   try {
-    const ecPublicKey = await jose.importSPKI(spkiPem);
-    console.log(ecPublicKey);
-    const { payload } = await jose.jwtVerify(token?.replace("Bearer ", ""), ecPublicKey, {
+    const { key } = await db.collection("sessions").findOne({ token })
+    const ecPublicKey = await jose.importSPKI(key);
+
+    const { payload } = await jose.jwtVerify(token, ecPublicKey, {
       issuer: 'urn:example:issuer',
       audience: 'urn:example:audience',
     })
-
-    res.status(200).send([{ text: 'Login feito com sucesso!', label: 'auth', payload }]);
+    res.locals.payload = payload;
     next();
 
   } catch (err) {
