@@ -2,7 +2,7 @@ import { Router } from "express";
 import { createUser, loginUser, addProductToCart, addProductToFavorites } from "../controllers/userController.js";
 import userAuth from "../middlewares/userAuthMiddleware.js";
 import { validateLogin } from "../middlewares/validateLoginMiddleware.js";
-import { validateProductById } from "../middlewares/validateProductMiddleware.js";
+import validateProduct, { validateProductById } from "../middlewares/validateProductMiddleware.js";
 import validateUser from "../middlewares/validateUserMiddleware.js";
  
 
