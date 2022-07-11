@@ -39,7 +39,7 @@ async function loginUser(req, res) {
                     .setExpirationTime('10m')
                     .sign(privateKey);
                 await db.collection("sessions").insertOne({ key: spkiPem, token })
-                res.status(200).send([{ user: findUser.name, text: "Login feito com sucesso", label: "success", token }]);
+                res.status(200).send([{ user: {cart: findUser.cart, favorites: findUser.favorites}, text: "Login feito com sucesso", label: "success", token }]);
             } else {
                 res.status(401).send([{text: "E-mail ou senha inválidos"}])
             }
