@@ -1,9 +1,10 @@
 import express, { json } from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import { userRoute } from "./routes/userRoute.js"
 import { productRoute } from "./routes/productRoute.js"
 import userAuth from "./middlewares/userAuthMiddleware.js";
-
+dotenv.config();
 const PORT = process.env.PORT;
 const app = express();
 app.use(json());
