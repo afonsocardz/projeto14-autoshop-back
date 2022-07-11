@@ -15,26 +15,28 @@ async function createUser(req, res) {
 }
 
 async function loginUser(req, res) {
-    const { email } = res.locals.login;
-
-    const { publicKey, privateKey } = await jose.generateKeyPair('ES256K')
-    const spkiPem = await jose.exportSPKI(publicKey)
-    console.log(spkiPem);
-
-    const token = await new jose.SignJWT({ 'urn:example:claim': true })
-        .setProtectedHeader({ alg: 'ES256K' })
-        .setIssuedAt()
-        .setIssuer('urn:example:issuer')
-        .setAudience('urn:example:audience')
-        .setExpirationTime('10m')
-        .sign(privateKey);
-
+    const login = res.locals.login;
     try {
-        const findUser = await db.collection("users").findOne({ email });
-        if (findUser) {
-            res.status(200).send([{ user: findUser.name, text: "Login feito com sucesso", label: "success", token, spkiPem }]);
-        } else {
+        const findUser = await db.collection("users").findOne({email:login.email});
+        console.log(findUser)
+        if (!findUser) {
             res.status(404).send([{ text: "Usuário não encontrado!" }]);
+        } else {
+            if (bcrypt.compareSync(login.password, findUser.password)) {
+                const { publicKey, privateKey } = await jose.generateKeyPair('ES256K')
+                const spkiPem = await jose.exportSPKI(publicKey)
+                const token = await new jose.SignJWT({ 'urn:example:claim': true })
+                    .setProtectedHeader({ alg: 'ES256K' })
+                    .setIssuedAt()
+                    .setIssuer('urn:example:issuer')
+                    .setAudience('urn:example:audience')
+                    .setExpirationTime('10m')
+                    .sign(privateKey);
+                await db.collection("sessions").insertOne({ key: spkiPem, token })
+                res.status(200).send([{ user: findUser.name, text: "Login feito com sucesso", label: "success", token }]);
+            } else {
+                res.status(401).send([{text: "E-mail ou senha inválidos"}])
+            }
         }
     } catch (err) {
         if (err.code) {
