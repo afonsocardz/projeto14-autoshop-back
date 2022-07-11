@@ -2,7 +2,6 @@ import { Router } from "express";
 import { createUser, loginUser, addProductToCart, addProductToFavorites } from "../controllers/userController.js";
 import { validateLogin } from "../middlewares/validateLoginMiddleware.js";
 import { validateProductById } from "../middlewares/validateProductMiddleware.js";
-import { validateToken } from "../middlewares/validateTokenMiddleware.js";
 import validateUser from "../middlewares/validateUserMiddleware.js";
  
 
